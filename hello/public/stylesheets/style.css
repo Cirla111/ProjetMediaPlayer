@@ -4,7 +4,19 @@
 }
 
 h1 {
-  color: red;
+  color: white;
+  margin-bottom: 10px;
+  margin-left: 0;
+}
+
+h3 {
+  color: white;
+  font-size: medium;
+  
+}
+
+#infos{
+  margin-left: 10px;
 }
 
 
@@ -51,8 +63,47 @@ header{
   width:90vw;
 }
 
+.frontMusic{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 75vh;
+  width:100%;
+}
+
+.canva{
+  display: flex;
+  flex-direction: row;
+  height: 70%;
+  width: 85%;
+  background-color:#2e2e2e70;
+}
+
+.imageFront{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 30%;
+}
+
+.albumCover{
+  
+  height: 100%;
+  width: auto;
+}
+
+.texteFront{
+  margin-top: 5%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  color: white;
+  height: 100%;
+  width: 70%;
+}
+
 .folders {
-  margin-top: 85vh;
   height: 50vh;
   width:100%;
   background-color:#2e2e2e;
