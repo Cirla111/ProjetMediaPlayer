@@ -1,8 +1,63 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+*{
+  margin: 0;
+  padding: 0;
 }
 
-a {
-  color: #00B7FF;
+h1 {
+  color: red;
 }
+
+
+
+body {
+  font: 40px "Lucida Grande", Helvetica, Arial, sans-serif;
+  height: 100%;
+  width:100%;
+  background-image: url("/images/music.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+header{
+  z-index: 100000;
+  width: 100vw;
+  height: 50px;
+  position: fixed;
+  background-color: black;
+}
+
+#allPage{
+  padding-top: 50px;
+  display: flex;
+  flex-direction:row;
+  height: 100%;
+  width:98.9vw;
+
+}
+
+.bandeau {
+  text-align: center;
+  color: aliceblue;
+  position: fixed;
+  height: 120vh;
+  width: 15vw;
+  background-color: black;
+}
+
+.mainPage {
+  margin-right: 1vw;
+  margin-left: 15vw;
+  height: 100%;
+  width:90vw;
+}
+
+.folders {
+  margin-top: 85vh;
+  height: 50vh;
+  width:100%;
+  background-color:#2e2e2e;
+}
+
+
+
+
