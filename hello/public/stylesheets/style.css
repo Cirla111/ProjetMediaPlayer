@@ -111,6 +111,25 @@ header{
   width: 70%;
 }
 
+.player {
+  height: 30%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.playPause {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background-color: blueviolet;
+  color:black;
+  font-size: medium;
+}
+
 .folders {
   height: 50vh;
   width:100%;
