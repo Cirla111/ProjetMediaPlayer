@@ -77,6 +77,14 @@ header{
   height: 70%;
   width: 85%;
   background-color:#2e2e2e70;
+  transition: all 3s;
+
+}
+
+.biggerCanva{
+  background-color:#2e2e2e70;
+  height: 100%;
+  width: 100%;
 }
 
 .imageFront{
@@ -108,6 +116,7 @@ header{
   width:100%;
   background-color:#2e2e2e;
 }
+
 
 
 
