@@ -3,17 +3,13 @@
 <html lang="fr">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>example1</title>
+    <title>Media Player</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
 </head>
 
 
-<<<<<<< Updated upstream
     <body >
 
-=======
-    <body>
->>>>>>> Stashed changes
         <header>
             zjefbhezfbh
         </header>
@@ -31,20 +27,14 @@
                         </div>
                         <div class="texteFront">
                             <h3>Titre</h3>
-<<<<<<< Updated upstream
                             
                             <h1 onclick="modif()">Remember</h1></a>
                             
                             <h3 id="infos">Sawano Hiroyuki, 2012</h3>
-=======
-                            <h1>Remember</h1>
-                            <h3 id="infos">Sawano Hiroyuki, 2012, <%=  title %></h3>
->>>>>>> Stashed changes
                         </div>
                     </div>
                 </div>
-                <div class="folders">
-                        <%= liste %>
+                <div class="folders" id="folders">
                 </div>
 
             </div>
@@ -56,11 +46,33 @@
 
 
     <script>
+        display_artist();
 
         
         function modif(){
             location.href="http://localhost:3000/listen"
             console.log("oueiuzfeziuhf")
+        }
+
+        function display_artist(){
+            const liste_artiste="<%= liste %>".split(",");
+            console.log(liste_artiste);
+            const folders_div = document.getElementById("folders");
+            const n=liste_artiste.length;
+            console.log("n: ",n);
+            for (let i=0;i<n;i++){
+                let div_artiste = document.createElement("div");
+                let text_artiste = document.createTextNode(liste_artiste[i]);
+                div_artiste.appendChild(text_artiste);
+                div_artiste.id = "div_artiste_"+i ;
+                console.log(div_artiste.id);
+                div_artiste.className = "div_artiste";
+                folders_div.appendChild(div_artiste);
+            }
+        }
+
+        function display_album(artist){
+
         }
 
         

@@ -25,7 +25,6 @@ router.get('/', function(req, res, next) {
 
 
 
-<<<<<<< Updated upstream
 function redirection() {
   
 }
@@ -34,6 +33,3 @@ function redirection() {
 
 
 module.exports = router;
-=======
-module.exports = router;
->>>>>>> Stashed changes
