@@ -8,8 +8,9 @@ router.get('/artist/:artist', function(req, res, next) {
     res.send({liste_albums: result});
   });
 
-router.get('/album', function(req, res, next) {
-    res.send({liste_songs: "bbbbbb"});
+router.get('/album/:artist/:album', function(req, res, next) {
+    result=get_songs(req.params.artist,req.params.album)
+    res.send({liste_songs: result});
 });
 
 router.get('/song', function(req, res, next) {

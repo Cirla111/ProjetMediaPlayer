@@ -84,13 +84,13 @@
                 const n=liste_albums.length;
                 for (let i=0;i<n;i++){
                     let div_album = document.createElement("div");
-                    /* let text_artiste = document.createTextNode(liste_artiste[i]); */
                     div_album.innerHTML = liste_albums[i];
-                    /* div_artiste.appendChild(text_artiste); */
-                    div_album.id = "div_album_"+i+artistid;
+                    div_album.id = "div_album_"+i+"_"+artistid;
                     div_album.className = "div_album";
-                    /* cmdfunction="display_album('" + div_artiste.id + "');"
-                    div_artiste.setAttribute("onclick",cmdfunction); */
+                    div_album.setAttribute("artist",artiste_name);
+                    div_album.setAttribute("alreadyclicked","false");
+                    cmdfunction="display_songs('" + div_album.id + "');"
+                    div_artiste.setAttribute("onclick",cmdfunction);
                     div_artiste.appendChild(div_album);
                 }
             }
@@ -99,6 +99,36 @@
                     div_artiste.lastChild.remove();
                 }
                 div_artiste.setAttribute("alreadyclicked", "false");
+
+            }
+            
+        }
+
+        function display_songs(albumid){
+            div_album=document.getElementById(albumid);
+            booleen= div_album.getAttribute("alreadyclicked");
+            if (booleen=="false"){
+                album_name=div_album.innerHTML;
+                div_album.setAttribute("alreadyclicked", "true");
+                liste_songs=JSON.parse(httpGet("http://localhost:3000/get/album/"+artiste_name+"/"+album_name)).liste_songs;
+                const n=liste_songs.length;
+                for (let i=0;i<n;i++){
+                    let div_song = document.createElement("div"); /*Ou audio à voir avec le GOAT du CSS*/
+                    /* let text_artiste = document.createTextNode(liste_artiste[i]); */
+                    div_song.innerHTML = liste_songs[i];
+                    /* div_artiste.appendChild(text_artiste); */
+                    div_song.id = "div_song_"+i+"_"+albumid;
+                    div_song.className = "div_song";
+                    /* cmdfunction="display_album('" + div_artiste.id + "');"
+                    div_artiste.setAttribute("onclick",cmdfunction); */
+                    div_album.appendChild(div_song);
+                }
+            }
+            else{
+                while (div_album.childNodes.length>1) {
+                    div_album.lastChild.remove();
+                }
+                div_album.setAttribute("alreadyclicked", "false");
 
             }
             
