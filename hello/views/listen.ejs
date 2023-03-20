@@ -56,12 +56,36 @@
 
     <script>
 
+        const playPause = document.querySelector(".playPause");
+        const audio = document.querySelector("audio");
+
+        let songPlay=false;
+        function Play(){
+            songPlay=true;
+            audio.play();
+            playPause.innerHTML = '<ion-icon name="pause"></ion-icon>';
+        }
+
+        function Pause(){
+            songPlay=false;
+            audio.pause();
+            playPause.innerHTML = '<ion-icon name="play"></ion-icon>';
+        }
+
+        playPause.addEventListener("click", () => (songPlay ? Pause() : Play()));
+
+
+        function changeSong(){
+            //changer le titre et tout
+            //changer le src de audio
+        }
     
         function mod(){
             const carre = document.querySelector(".canva")
             carre.classList.add("biggerCanva")
             console.log("njezfnjzeifziejfb")
         }
+
         
         
     </script>

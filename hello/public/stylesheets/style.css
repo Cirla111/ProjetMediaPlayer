@@ -118,7 +118,7 @@ header{
   align-items: center;
 }
 
-.playPause {
+.player span {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -128,6 +128,7 @@ header{
   background-color: blueviolet;
   color:black;
   font-size: medium;
+  cursor: pointer;
 }
 
 .folders {
