@@ -3,7 +3,7 @@
 <html lang="fr">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>example1</title>
+    <title>Media Player</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
 </head>
 
@@ -34,8 +34,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="folders">
-
+                <div class="folders" id="folders">
                 </div>
 
             </div>
@@ -47,11 +46,100 @@
 
 
     <script>
+        display_artist();
 
         
         function modif(){
             location.href="/listen"
         }
+
+        function display_artist(){
+            const liste_artiste="<%= liste %>".split(",");
+            /* console.log(liste_artiste); */
+            const folders_div = document.getElementById("folders");
+            const n=liste_artiste.length;
+            for (let i=0;i<n;i++){
+                let div_artiste = document.createElement("div");
+                document.createAttribute("class");
+                /* let text_artiste = document.createTextNode(liste_artiste[i]); */
+                div_artiste.innerHTML = liste_artiste[i];
+                /* div_artiste.appendChild(text_artiste); */
+                div_artiste.id = "div_artiste_"+i ;
+                div_artiste.className = "div_artiste";
+                cmdfunction="display_album('" + div_artiste.id + "');"
+                div_artiste.setAttribute("alreadyclicked","false");
+                div_artiste.setAttribute("onclick",cmdfunction);
+                folders_div.appendChild(div_artiste);
+            }
+        }
+
+        function display_album(artistid){
+            div_artiste=document.getElementById(artistid);
+            booleen= div_artiste.getAttribute("alreadyclicked");
+            if (booleen=="false"){
+                artiste_name=div_artiste.innerHTML;
+                div_artiste.setAttribute("alreadyclicked", "true");
+                liste_albums=JSON.parse(httpGet("http://localhost:3000/get/artist/"+artiste_name)).liste_albums;
+                const n=liste_albums.length;
+                for (let i=0;i<n;i++){
+                    let div_album = document.createElement("div");
+                    div_album.innerHTML = liste_albums[i];
+                    div_album.id = "div_album_"+i+"_"+artistid;
+                    div_album.className = "div_album";
+                    div_album.setAttribute("artist",artiste_name);
+                    div_album.setAttribute("alreadyclicked","false");
+                    cmdfunction="display_songs('" + div_album.id + "');"
+                    div_artiste.setAttribute("onclick",cmdfunction);
+                    div_artiste.appendChild(div_album);
+                }
+            }
+            else{
+                while (div_artiste.childNodes.length>1) {
+                    div_artiste.lastChild.remove();
+                }
+                div_artiste.setAttribute("alreadyclicked", "false");
+
+            }
+            
+        }
+
+        function display_songs(albumid){
+            div_album=document.getElementById(albumid);
+            booleen= div_album.getAttribute("alreadyclicked");
+            if (booleen=="false"){
+                album_name=div_album.innerHTML;
+                div_album.setAttribute("alreadyclicked", "true");
+                liste_songs=JSON.parse(httpGet("http://localhost:3000/get/album/"+artiste_name+"/"+album_name)).liste_songs;
+                const n=liste_songs.length;
+                for (let i=0;i<n;i++){
+                    let div_song = document.createElement("div"); /*Ou audio à voir avec le GOAT du CSS*/
+                    /* let text_artiste = document.createTextNode(liste_artiste[i]); */
+                    div_song.innerHTML = liste_songs[i];
+                    /* div_artiste.appendChild(text_artiste); */
+                    div_song.id = "div_song_"+i+"_"+albumid;
+                    div_song.className = "div_song";
+                    /* cmdfunction="display_album('" + div_artiste.id + "');"
+                    div_artiste.setAttribute("onclick",cmdfunction); */
+                    div_album.appendChild(div_song);
+                }
+            }
+            else{
+                while (div_album.childNodes.length>1) {
+                    div_album.lastChild.remove();
+                }
+                div_album.setAttribute("alreadyclicked", "false");
+
+            }
+            
+        }
+
+        function httpGet(theUrl) {
+        let xmlHttpReq = new XMLHttpRequest();
+        xmlHttpReq.open("GET", theUrl, false);
+        xmlHttpReq.send(null);
+        return xmlHttpReq.responseText;
+        }
+      
 
         
 
