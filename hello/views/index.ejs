@@ -8,7 +8,7 @@
 </head>
 
 
-    <body >
+    <body onload="changeSong()" >
 
         <header>
             zjefbhezfbh
@@ -23,14 +23,16 @@
                 <div class="frontMusic">
                     <div class="canva">
                         <div class="imageFront">
+                            <!-- <img src="http://localhost:3000/get/image" id="albumCover"/> -->
                             <img src="images/SawanoCover.jpg" id="albumCover"/>
                         </div>
                         <div class="texteFront">
                             <h3>Titre</h3>
                             
-                            <h1 onclick="modif()">Remember</h1></a>
+                            <h1 id="h1_Titre" onclick="modif()">Remember</h1></a>
                             
                             <h3 id="infos">Sawano Hiroyuki, 2012</h3>
+                            <h3 id="infos_album">Sawano Hiroyuki, 2012</h3>
                         </div>
                     </div>
                 </div>
@@ -47,6 +49,7 @@
 
     <script>
         display_artist();
+        /* test_image(); */
 
         
         function modif(){
@@ -138,6 +141,26 @@
         xmlHttpReq.open("GET", theUrl, false);
         xmlHttpReq.send(null);
         return xmlHttpReq.responseText;
+        }
+
+        function changeSong(){
+            //changer le titre et tout
+            //changer le src de audio
+            document.getElementById("h1_Titre").innerHTML="<%= titre %>";
+            document.getElementById("infos_album").innerHTML="<%= album %>";
+            document.getElementById("infos").innerHTML= "<%= artiste %>";
+            //document.getElementById("audio_balise")
+            
+        }
+
+        function test_image(){
+            image_file=httpGet("http://localhost:3000/get/image");
+            console.log(image_file);
+            div_folders=document.getElementById("folders");
+            let image = document.createElement("img");
+            image.setAttribute("src",image_file);
+            div_folders.appendChild(image);
+
         }
       
 

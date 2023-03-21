@@ -11,6 +11,13 @@ var getRouter= require('./routes/get');
 
 var app = express();
 
+//Chemins des dossiers définis en global
+global.FolderMusique="/home/damien/Musique";
+global.FolderImages="/home/damien/Images/images_app_web";
+
+//Musique en train d'être écoutée:
+global.current_musique = get_random_song();
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -41,5 +48,12 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+function get_random_song(){
+  title="La thune.ogg";
+  artist="Angèle";
+  album="Brol";
+  return [artist,album,title];
+}
 
 module.exports = app;

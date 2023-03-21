@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 const fs = require('fs');
-const folderName = 'C:/Users/33645/Desktop/Jeux/Pokemon Essentials 19/Audio';
 
 router.get('/artist/:artist', function(req, res, next) {
     result=get_albums(req.params.artist)
@@ -17,6 +16,14 @@ router.get('/song', function(req, res, next) {
     res.send( { title: 'Express', liste: "cccccc"});
 });
 
+router.get('/image/album/:albumid', function(req, res, next) {
+    
+    fileName="/home/damien/Images/bigflooli.jpg";
+    res.sendFile(fileName);
+});
+
+
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
     res.send({ title: 'Express', liste: "dddddd" });
@@ -25,12 +32,12 @@ router.get('/', function(req, res, next) {
 module.exports = router;
 
 function get_albums(artist){
-    var list_folder= fs.readdirSync(folderName+"/"+artist);
+    var list_folder= fs.readdirSync(FolderMusique+"/"+artist);
     return list_folder;
 }
 
 function get_songs(artist,album){
-    var list_folder= fs.readdirSync(folderName+"/"+artist+"/"+album);
+    var list_folder= fs.readdirSync(FolderMusique+"/"+artist+"/"+album);
     return list_folder;
 }
 
