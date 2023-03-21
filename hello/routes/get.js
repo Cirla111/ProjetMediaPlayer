@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 const fs = require('fs');
 
+FolderMusique="/home/damien/Musique";
+FolderImages="/home/damien/Images/images_app_web";
+
 
 router.get('/artist/:artist', function(req, res, next) {
     result=get_albums(req.params.artist)
@@ -19,10 +22,15 @@ router.get('/song', function(req, res, next) {
 
 router.get('/image/album/:albumid', function(req, res, next) {
     
-    fileName="/home/damien/Images/bigflooli.jpg";
+    fileName=FolderImages + "/Covers/"+req.params.albumid+".jpeg";
     res.sendFile(fileName);
 });
 
+router.get('/image/artist/:artistid', function(req, res, next) {
+    
+    fileName=FolderImages + "/Artists/"+req.params.artistid+".jpeg";
+    res.sendFile(fileName);
+});
 
 
 /* GET home page. */

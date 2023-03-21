@@ -2,16 +2,19 @@ var express = require('express');
 var router = express.Router();
 const fs = require('fs');
 
+FolderMusique="/home/damien/Musique";
+FolderImages="/home/damien/Images/images_app_web";
+
 try {
-  if (!fs.existsSync(folderName)) {
+  if (!fs.existsSync(FolderMusique)) {
     console.log("Le dossier existe pas");
-    fs.mkdirSync(folderName);
+    fs.mkdirSync(FolderMusique);
   }
 } catch (err) {
   console.log("COUCOUCCCC");
   console.error(err);
 }
-var list_folder= fs.readdirSync(folderName);
+var list_folder= fs.readdirSync(FolderMusique);
 var length_folder= list_folder.length;
 for (let i=0; i<length_folder; i++){
   
