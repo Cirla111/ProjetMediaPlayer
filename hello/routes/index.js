@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 const fs = require('fs');
-const folderName = '/home/damien/Musique';
 
 try {
   if (!fs.existsSync(folderName)) {
@@ -20,7 +19,10 @@ for (let i=0; i<length_folder; i++){
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express', liste: list_folder});
+  artiste_musique= current_musique[0];
+  album_musique= current_musique[1];
+  titre_musique= current_musique[2];
+  res.render('index', { titre: titre_musique, artiste: artiste_musique, album: album_musique, liste: list_folder});
 });
 
 

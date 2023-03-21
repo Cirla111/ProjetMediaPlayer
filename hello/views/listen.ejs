@@ -8,7 +8,7 @@
 </head>
 
 
-    <body onload="mod()">
+    <body onload="demarrage()">
 
         <header>
             zjefbhezfbh
@@ -27,10 +27,11 @@
                         </div>
                         <div class="texteFront">
                             <h3>Titre</h3>
-                            <h1>Remember</h1>
+                            <h1 id="h1_Titre">Remember</h1>
                             <h3 id="infos">Sawano Hiroyuki, 2012</h3>
+                            <h3 id="infos_album">Sawano Hiroyuki, 2012</h3>
                             <div class="player">
-                                <audio src="/music/pkmn.mp3"></audio>
+                                <audio id="balise_audio" src="/music/pkmn.mp3"></audio>
                                 <span class="playPause">
                                     <ion-icon name="play"></ion-icon>
                                 </span>
@@ -55,6 +56,7 @@
 
 
     <script>
+        
 
         const playPause = document.querySelector(".playPause");
         const audio = document.querySelector("audio");
@@ -78,12 +80,22 @@
         function changeSong(){
             //changer le titre et tout
             //changer le src de audio
+            document.getElementById("h1_Titre").innerHTML="<%= titre %>";
+            document.getElementById("infos_album").innerHTML="<%= album %>";
+            document.getElementById("infos").innerHTML= "<%= artiste %>";
+            //document.getElementById("audio_balise")
+            
         }
     
         function mod(){
             const carre = document.querySelector(".canva")
             carre.classList.add("biggerCanva")
             console.log("njezfnjzeifziejfb")
+        }
+
+        function demarrage(){
+            changeSong();
+            mod();
         }
 
         
