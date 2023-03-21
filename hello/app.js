@@ -12,8 +12,8 @@ var getRouter= require('./routes/get');
 var app = express();
 
 //Chemins des dossiers
-FolderMusique="/home/damien/Musique";
-FolderImages="/home/damien/Images/images_app_web";
+FolderMusique="C:/Users/33645/Desktop/la fameuse/WEB/MusicMedia/Musique";
+FolderImages="C:/Users/33645/Desktop/la fameuse/WEB/MusicMedia/Images";
 
 //Musique en train d'être écoutée:
 global.current_musique = get_random_song();

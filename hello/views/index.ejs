@@ -16,7 +16,7 @@
 
         
         <div id="allPage"> 
-            <div class = "bandeau">
+            <div class = "bandeau" id="leCote">
                 ouiiiiiiiiiiii
             </div>
             <div class = "mainPage">
@@ -58,8 +58,9 @@
 
         function display_artist(){
             const liste_artiste="<%= liste %>".split(",");
-            /* console.log(liste_artiste); */
+            // console.log(liste_artiste);
             const folders_div = document.getElementById("folders");
+            const side_div = document.getElementById("leCote");
             const n=liste_artiste.length;
             for (let i=0;i<n;i++){
                 let div_artiste = document.createElement("div");
@@ -73,66 +74,156 @@
                 div_artiste.setAttribute("alreadyclicked","false");
                 div_artiste.setAttribute("onclick",cmdfunction);
                 folders_div.appendChild(div_artiste);
+
+                // En test
+                let div_artiste_side = document.createElement("div");
+                document.createAttribute("class");
+                div_artiste_side.innerHTML = liste_artiste[i];
+                div_artiste_side.className = "div_artiste_side";
+                div_artiste_side.id = "div_artiste_"+i+"_side" ;
+                cmdfunction_side="display_album_side('" + div_artiste.id + "');"
+                div_artiste_side.setAttribute("alreadyclicked","false");
+                div_artiste_side.setAttribute("onclick",cmdfunction_side);
+                side_div.appendChild(div_artiste_side);
+                //En test
             }
         }
 
         function display_album(artistid){
-            div_artiste=document.getElementById(artistid);
-            booleen= div_artiste.getAttribute("alreadyclicked");
-            if (booleen=="false"){
-                artiste_name=div_artiste.innerHTML;
-                div_artiste.setAttribute("alreadyclicked", "true");
-                liste_albums=JSON.parse(httpGet("http://localhost:3000/get/artist/"+artiste_name)).liste_albums;
-                const n=liste_albums.length;
-                for (let i=0;i<n;i++){
-                    let div_album = document.createElement("div");
-                    div_album.innerHTML = liste_albums[i];
-                    div_album.id = "div_album_"+i+"_"+artistid;
-                    div_album.className = "div_album";
-                    div_album.setAttribute("artist",artiste_name);
-                    div_album.setAttribute("alreadyclicked","false");
-                    cmdfunction="display_songs('" + div_album.id + "');"
-                    div_artiste.setAttribute("onclick",cmdfunction);
-                    div_artiste.appendChild(div_album);
-                }
-            }
-            else{
-                while (div_artiste.childNodes.length>1) {
-                    div_artiste.lastChild.remove();
-                }
-                div_artiste.setAttribute("alreadyclicked", "false");
 
+            const folders_div = document.getElementById("folders");
+            
+            div_artiste=document.getElementById(artistid);
+            artiste_name=div_artiste.innerHTML;
+            liste_albums=JSON.parse(httpGet("http://localhost:3000/get/artist/"+artiste_name)).liste_albums;
+            const n=liste_albums.length;
+            while (folders_div.childNodes.length>1) {
+                    folders_div.lastChild.remove();
+                }
+            for (let i=0;i<n;i++){
+                let div_album = document.createElement("div");
+                div_album.innerHTML = liste_albums[i];
+                div_album.id = "div_album_"+i+"_"+artistid;
+                div_album.className = "div_album";
+                div_album.setAttribute("artist",artiste_name);
+                cmdfunction="display_songs('" + div_album.id + "');"
+                div_album.setAttribute("onclick",cmdfunction);
+                folders_div.appendChild(div_album);
             }
+        
+            
+            // div_artiste=document.getElementById(artistid);
+            // booleen= div_artiste.getAttribute("alreadyclicked");
+            // if (booleen=="false"){
+            //     artiste_name=div_artiste.innerHTML;
+            //     div_artiste.setAttribute("alreadyclicked", "true");
+            //     liste_albums=JSON.parse(httpGet("http://localhost:3000/get/artist/"+artiste_name)).liste_albums;
+            //     const n=liste_albums.length;
+            //     for (let i=0;i<n;i++){
+            //         let div_album = document.createElement("div");
+            //         div_album.innerHTML = liste_albums[i];
+            //         div_album.id = "div_album_"+i+"_"+artistid;
+            //         div_album.className = "div_album";
+            //         div_album.setAttribute("artist",artiste_name);
+            //         div_album.setAttribute("alreadyclicked","false");
+            //         cmdfunction="display_songs('" + div_album.id + "');"
+            //         div_artiste.setAttribute("onclick",cmdfunction);
+            //         div_artiste.appendChild(div_album);
+            //     }
+            // }
+            // else{
+            //     while (div_artiste.childNodes.length>1) {
+            //         div_artiste.lastChild.remove();
+            //     }
+            //     div_artiste.setAttribute("alreadyclicked", "false");
+
+            // }
             
         }
 
-        function display_songs(albumid){
-            div_album=document.getElementById(albumid);
-            booleen= div_album.getAttribute("alreadyclicked");
+
+        //En test
+        function display_album_side(artistid){
+            div_artiste_side=document.getElementById(artistid+"_side");
+            booleen= div_artiste_side.getAttribute("alreadyclicked");
+
             if (booleen=="false"){
-                album_name=div_album.innerHTML;
-                div_album.setAttribute("alreadyclicked", "true");
-                liste_songs=JSON.parse(httpGet("http://localhost:3000/get/album/"+artiste_name+"/"+album_name)).liste_songs;
-                const n=liste_songs.length;
+                artiste_name=div_artiste_side.innerHTML;
+                div_artiste_side.setAttribute("alreadyclicked", "true");
+                liste_albums=JSON.parse(httpGet("http://localhost:3000/get/artist/"+artiste_name)).liste_albums;
+                const n=liste_albums.length;
                 for (let i=0;i<n;i++){
-                    let div_song = document.createElement("div"); /*Ou audio à voir avec le GOAT du CSS*/
-                    /* let text_artiste = document.createTextNode(liste_artiste[i]); */
-                    div_song.innerHTML = liste_songs[i];
-                    /* div_artiste.appendChild(text_artiste); */
-                    div_song.id = "div_song_"+i+"_"+albumid;
-                    div_song.className = "div_song";
-                    /* cmdfunction="display_album('" + div_artiste.id + "');"
-                    div_artiste.setAttribute("onclick",cmdfunction); */
-                    div_album.appendChild(div_song);
+                    let div_album_side = document.createElement("div");
+                    div_album_side.innerHTML = liste_albums[i];
+                    div_album_side.id = "div_album_"+i+"_"+artistid+"_side";
+                    div_album_side.className = "div_album_side";
+                    div_album_side.setAttribute("artist",artiste_name);
+                    div_album_side.setAttribute("alreadyclicked","false");
+                    cmdfunction="display_songs('" + div_album_side.id + "');"
+                    div_artiste_side.setAttribute("onclick",cmdfunction);
+                    div_artiste_side.appendChild(div_album_side);
                 }
             }
             else{
-                while (div_album.childNodes.length>1) {
-                    div_album.lastChild.remove();
+                while (div_artiste_side.childNodes.length>1) {
+                    div_artiste_side.lastChild.remove();
                 }
-                div_album.setAttribute("alreadyclicked", "false");
+                div_artiste_side.setAttribute("alreadyclicked", "false");
 
             }
+        }
+        //En test
+
+
+
+
+
+
+        function display_songs(albumid){
+
+            const folders_div = document.getElementById("folders");
+            
+            div_album=document.getElementById(albumid);
+            album_name=div_album.innerHTML;
+            liste_songs=JSON.parse(httpGet("http://localhost:3000/get/album/"+artiste_name+"/"+album_name)).liste_songs;
+            const n=liste_songs.length;
+            while (folders_div.childNodes.length>1) {
+                    folders_div.lastChild.remove();
+            }
+            for (let i=0;i<n;i++){
+                    let div_song = document.createElement("div"); /*Ou audio à voir avec le GOAT du CSS*/
+                    div_song.innerHTML = liste_songs[i];
+                    div_song.id = "div_song_"+i+"_"+albumid;
+                    div_song.className = "div_song";
+                    folders_div.appendChild(div_song);
+                }
+            
+            // div_album=document.getElementById(albumid);
+            // booleen= div_album.getAttribute("alreadyclicked");
+            // if (booleen=="false"){
+            //     album_name=div_album.innerHTML;
+            //     div_album.setAttribute("alreadyclicked", "true");
+            //     liste_songs=JSON.parse(httpGet("http://localhost:3000/get/album/"+artiste_name+"/"+album_name)).liste_songs;
+            //     const n=liste_songs.length;
+            //     for (let i=0;i<n;i++){
+            //         let div_song = document.createElement("div"); /*Ou audio à voir avec le GOAT du CSS*/
+            //         /* let text_artiste = document.createTextNode(liste_artiste[i]); */
+            //         div_song.innerHTML = liste_songs[i];
+            //         /* div_artiste.appendChild(text_artiste); */
+            //         div_song.id = "div_song_"+i+"_"+albumid;
+            //         div_song.className = "div_song";
+            //         /* cmdfunction="display_album('" + div_artiste.id + "');"
+            //         div_artiste.setAttribute("onclick",cmdfunction); */
+            //         div_album.appendChild(div_song);
+            //     }
+            // }
+            // else{
+            //     while (div_album.childNodes.length>1) {
+            //         div_album.lastChild.remove();
+            //     }
+            //     div_album.setAttribute("alreadyclicked", "false");
+
+            // }
             
         }
 
