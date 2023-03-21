@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const fs = require('fs');
-const folderName = '/home/damien/Musique';
+const folderName = 'C:/Users/33645/Desktop/Jeux/Pokemon Essentials 19/Audio';
 
 router.get('/artist/:artist', function(req, res, next) {
     result=get_albums(req.params.artist)

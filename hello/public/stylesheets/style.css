@@ -1,6 +1,7 @@
 *{
   margin: 0;
   padding: 0;
+  
 }
 
 h1 {
@@ -19,12 +20,18 @@ h3 {
   margin-left: 10px;
 }
 
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 
 
 body {
   font: 40px "Lucida Grande", Helvetica, Arial, sans-serif;
   height: 100%;
   width:100%;
+  
   background-image: url("/images/music.jpg");
   background-size: cover;
   background-attachment: fixed;
@@ -57,10 +64,9 @@ header{
 }
 
 .mainPage {
-  margin-right: 1vw;
   margin-left: 15vw;
   height: 100%;
-  width:90vw;
+  width:85vw;
 }
 
 .frontMusic{
@@ -68,7 +74,7 @@ header{
   align-items: center;
   justify-content: center;
   height: 75vh;
-  width:100%;
+  width:85vw;
 }
 
 .canva{
@@ -132,10 +138,20 @@ header{
 }
 
 .folders {
-  height: 50vh;
-  width:100%;
+  height: auto;
+  width:97%;
+  max-width: 97%;
   background-color:#2e2e2e;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
+
+.div_artiste {
+  margin: 100px;
+}
+
+
 
 
 
