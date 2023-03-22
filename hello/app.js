@@ -13,7 +13,7 @@ var app = express();
 
 //Chemins des dossiers
 FolderMusique="C:/Users/33645/Desktop/la fameuse/WEB/MusicMedia/Musique";
-FolderImages="C:/Users/33645/Desktop/la fameuse/WEB/MusicMedia/Images";
+FolderImages="C:/Users/33645/Desktop/la fameuse/WEB/MusicMedia/images_app_web";
 
 //Musique en train d'être écoutée:
 global.current_musique = get_random_song();

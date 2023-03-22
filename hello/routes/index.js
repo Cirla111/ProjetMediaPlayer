@@ -3,7 +3,7 @@ var router = express.Router();
 const fs = require('fs');
 
 FolderMusique="C:/Users/33645/Desktop/la fameuse/WEB/MusicMedia/Musique";
-FolderImages="C:/Users/33645/Desktop/la fameuse/WEB/MusicMedia/Images";
+FolderImages="C:/Users/33645/Desktop/la fameuse/WEB/MusicMedia/images_app_web";
 
 try {
   if (!fs.existsSync(FolderMusique)) {

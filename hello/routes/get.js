@@ -2,8 +2,6 @@ var express = require('express');
 var router = express.Router();
 const fs = require('fs');
 
-FolderMusique="/home/damien/Musique";
-FolderImages="/home/damien/Images/images_app_web";
 
 
 router.get('/artist/:artist', function(req, res, next) {
@@ -23,6 +21,7 @@ router.get('/song', function(req, res, next) {
 router.get('/image/album/:albumid', function(req, res, next) {
     
     fileName=FolderImages + "/Covers/"+req.params.albumid+".jpeg";
+    console.log(fileName);
     res.sendFile(fileName);
 });
 

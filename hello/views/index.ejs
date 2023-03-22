@@ -31,8 +31,10 @@
                             
                             <h1 id="h1_Titre" onclick="modif()">Remember</h1></a>
                             
-                            <h3 id="infos">Sawano Hiroyuki, 2012</h3>
-                            <h3 id="infos_album">Sawano Hiroyuki, 2012</h3>
+                            <div class="infosall">
+                                <h3 id="infos">Sawano Hiroyuki, 2012, </h3>
+                                <h3 id="infos_album">Sawano Hiroyuki, 2012</h3>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -58,22 +60,42 @@
 
         function display_artist(){
             const liste_artiste="<%= liste %>".split(",");
-            // console.log(liste_artiste);
+            // console.log(liste_artiste[0]);
             const folders_div = document.getElementById("folders");
             const side_div = document.getElementById("leCote");
             const n=liste_artiste.length;
             for (let i=0;i<n;i++){
+                
+
+
                 let div_artiste = document.createElement("div");
                 document.createAttribute("class");
-                /* let text_artiste = document.createTextNode(liste_artiste[i]); */
                 div_artiste.innerHTML = liste_artiste[i];
-                /* div_artiste.appendChild(text_artiste); */
                 div_artiste.id = "div_artiste_"+i ;
                 div_artiste.className = "div_artiste";
-                cmdfunction="display_album('" + div_artiste.id + "');"
                 div_artiste.setAttribute("alreadyclicked","false");
-                div_artiste.setAttribute("onclick",cmdfunction);
-                folders_div.appendChild(div_artiste);
+
+                a='<img id="img_artiste_0" class="img_artiste" src="http://localhost:3000/get/image/artist/' + liste_artiste[i] + '"/>'
+
+                // let img_artiste = document.createElement("img");
+                // img_artiste.id = "img_artiste_"+i ;
+                // img_artiste.className = "img_artiste";
+                // div_artiste.src="http://localhost:3000/get/image/artist/"+liste_artiste[i];
+
+                let div_tot = document.createElement("div");
+                div_tot.className = 'container_img_txt'
+                cmdfunction="display_album('" + div_artiste.id + "');"
+                div_tot.setAttribute("onclick",cmdfunction);
+
+                let div_img = document.createElement("div");
+                div_img.className = 'div_img'
+                div_img.innerHTML+=a;
+
+                // div_tot.appendChild(img_artiste);
+                
+                div_tot.appendChild(div_img);
+                div_tot.appendChild(div_artiste);
+                folders_div.appendChild(div_tot);
 
                 // En test
                 let div_artiste_side = document.createElement("div");
@@ -96,6 +118,7 @@
             div_artiste=document.getElementById(artistid);
             artiste_name=div_artiste.innerHTML;
             liste_albums=JSON.parse(httpGet("http://localhost:3000/get/artist/"+artiste_name)).liste_albums;
+            // console.log(JSON.parse(httpGet("http://localhost:3000/get/image/album/"+"<%= liste %>")));
             const n=liste_albums.length;
             while (folders_div.childNodes.length>1) {
                     folders_div.lastChild.remove();
@@ -239,7 +262,7 @@
             //changer le src de audio
             document.getElementById("h1_Titre").innerHTML="<%= titre %>";
             document.getElementById("infos_album").innerHTML="<%= album %>";
-            document.getElementById("infos").innerHTML= "<%= artiste %>";
+            document.getElementById("infos").innerHTML= "<%= artiste %>"+', ';
             document.getElementById("albumCover").src="http://localhost:3000/get/image/album/"+"<%= album %>";
             //document.getElementById("audio_balise")
             
