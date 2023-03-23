@@ -17,7 +17,6 @@
         
         <div id="allPage"> 
             <div class = "bandeau" id="leCote">
-                ouiiiiiiiiiiii
             </div>
             <div class = "mainPage">
                 <div class="frontMusic">
@@ -77,11 +76,6 @@
 
                 a='<img id="img_artiste_0" class="img_artiste" src="http://localhost:3000/get/image/artist/' + liste_artiste[i] + '"/>'
 
-                // let img_artiste = document.createElement("img");
-                // img_artiste.id = "img_artiste_"+i ;
-                // img_artiste.className = "img_artiste";
-                // div_artiste.src="http://localhost:3000/get/image/artist/"+liste_artiste[i];
-
                 let div_tot = document.createElement("div");
                 div_tot.className = 'container_img_txt'
                 cmdfunction="display_album('" + div_artiste.id + "');"
@@ -91,22 +85,25 @@
                 div_img.className = 'div_img'
                 div_img.innerHTML+=a;
 
-                // div_tot.appendChild(img_artiste);
+                let div_categ = document.createElement("div");
+                div_categ.className = 'div_categ';
+                div_categ.innerHTML = "Artiste";
                 
                 div_tot.appendChild(div_img);
                 div_tot.appendChild(div_artiste);
+                div_tot.appendChild(div_categ);
                 folders_div.appendChild(div_tot);
 
                 // En test
-                let div_artiste_side = document.createElement("div");
-                document.createAttribute("class");
-                div_artiste_side.innerHTML = liste_artiste[i];
-                div_artiste_side.className = "div_artiste_side";
-                div_artiste_side.id = "div_artiste_"+i+"_side" ;
-                cmdfunction_side="display_album_side('" + div_artiste.id + "');"
-                div_artiste_side.setAttribute("alreadyclicked","false");
-                div_artiste_side.setAttribute("onclick",cmdfunction_side);
-                side_div.appendChild(div_artiste_side);
+                // let div_artiste_side = document.createElement("div");
+                // document.createAttribute("class");
+                // div_artiste_side.innerHTML = liste_artiste[i];
+                // div_artiste_side.className = "div_artiste_side";
+                // div_artiste_side.id = "div_artiste_"+i+"_side" ;
+                // cmdfunction_side="display_album_side('" + div_artiste.id + "');"
+                // div_artiste_side.setAttribute("alreadyclicked","false");
+                // div_artiste_side.setAttribute("onclick",cmdfunction_side);
+                // side_div.appendChild(div_artiste_side);
                 //En test
             }
         }
@@ -117,6 +114,7 @@
             
             div_artiste=document.getElementById(artistid);
             artiste_name=div_artiste.innerHTML;
+            console.log(artiste_name);
             liste_albums=JSON.parse(httpGet("http://localhost:3000/get/artist/"+artiste_name)).liste_albums;
             // console.log(JSON.parse(httpGet("http://localhost:3000/get/image/album/"+"<%= liste %>")));
             const n=liste_albums.length;
@@ -129,9 +127,28 @@
                 div_album.id = "div_album_"+i+"_"+artistid;
                 div_album.className = "div_album";
                 div_album.setAttribute("artist",artiste_name);
+
+                a='<img class="img_album" src="http://localhost:3000/get/image/album/' +liste_albums[i] + '"/>'
+
+                let div_tot = document.createElement("div");
+                div_tot.className = 'container_img_txt'
                 cmdfunction="display_songs('" + div_album.id + "');"
-                div_album.setAttribute("onclick",cmdfunction);
-                folders_div.appendChild(div_album);
+                div_tot.setAttribute("onclick",cmdfunction);
+
+                let div_img = document.createElement("div");
+                div_img.className = 'div_img'
+                div_img.innerHTML+=a;
+
+                let div_categ = document.createElement("div");
+                div_categ.className = 'div_categ';
+                div_categ.innerHTML = "Album";
+                
+                div_tot.appendChild(div_img);
+                div_tot.appendChild(div_album);
+                div_tot.appendChild(div_categ);
+                folders_div.appendChild(div_tot);
+
+
             }
         
             
