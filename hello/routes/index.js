@@ -2,19 +2,22 @@ var express = require('express');
 var router = express.Router();
 const fs = require('fs');
 
-FolderMusique="C:/Users/33645/Desktop/la fameuse/WEB/MusicMedia/Musique";
-FolderImages="C:/Users/33645/Desktop/la fameuse/WEB/MusicMedia/images_app_web";
+/* folder_musique="C:/Users/33645/Desktop/la fameuse/WEB/MusicMedia/Musique";
+folder_images="C:/Users/33645/Desktop/la fameuse/WEB/MusicMedia/images_app_web"; */
+
+/* folder_musique="/home/damien/Musique"
+folder_images="/home/damien/Images/images_app_web" */
 
 try {
-  if (!fs.existsSync(FolderMusique)) {
+  if (!fs.existsSync(folder_musique)) {
     console.log("Le dossier existe pas");
-    fs.mkdirSync(FolderMusique);
+    fs.mkdirSync(folder_musique);
   }
 } catch (err) {
   console.log("COUCOUCCCC");
   console.error(err);
 }
-var list_folder= fs.readdirSync(FolderMusique);
+var list_folder= fs.readdirSync(folder_musique);
 var length_folder= list_folder.length;
 for (let i=0; i<length_folder; i++){
   
@@ -34,6 +37,12 @@ function redirection() {
   
 }
 
+function httpGet(theUrl) {
+  let xmlHttpReq = new XMLHttpRequest();
+  xmlHttpReq.open("GET", theUrl, false);
+  xmlHttpReq.send(null);
+  return xmlHttpReq.responseText;
+  }
 
 
 

@@ -4,19 +4,16 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+global.folder_musique="/home/damien/Musique";
+global.folder_images="/home/damien/Images/images_app_web";
+global.current_musique=["Lomepal","FLIP","01 - Palpal"];
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var listenRouter = require('./routes/listen');
 var getRouter= require('./routes/get');
 
 var app = express();
-
-//Chemins des dossiers
-FolderMusique="C:/Users/33645/Desktop/la fameuse/WEB/MusicMedia/Musique";
-FolderImages="C:/Users/33645/Desktop/la fameuse/WEB/MusicMedia/images_app_web";
-
-//Musique en train d'être écoutée:
-global.current_musique = get_random_song();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -48,12 +45,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-function get_random_song(){
-  title="Palpal";
-  artist="Lomepal";
-  album="FLIP";
-  return [artist,album,title];
-}
 
 module.exports = app;
