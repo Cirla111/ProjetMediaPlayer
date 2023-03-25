@@ -25,6 +25,27 @@ for (let i=0; i<length_folder; i++){
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  max_art=list_folder.length;
+  nbr_art=max_art;
+  while(nbr_art===max_art){
+    nbr_art = Math.floor(Math.random() * max_art);
+  }
+  var list_album= fs.readdirSync(folder_musique + "/" + list_folder[nbr_art]);
+  max_alb=list_album.length;
+  nbr_alb=max_alb;
+  while(nbr_alb===max_alb){
+    nbr_alb = Math.floor(Math.random() * max_alb);
+  }
+  var list_song= fs.readdirSync(folder_musique + "/" + list_folder[nbr_art] + "/" + list_album[nbr_alb]);
+  max_sg=list_song.length;
+  nbr_sg=max_sg;
+  while(nbr_sg===max_sg){
+    nbr_sg = Math.floor(Math.random() * max_sg);
+  }
+  console.log(list_folder[nbr_art]);
+  console.log(list_album[nbr_alb]);
+  console.log(list_song[nbr_sg]);
+  current_musique=[list_folder[nbr_art],list_album[nbr_alb],list_song[nbr_sg]]
   artiste_musique= current_musique[0];
   album_musique= current_musique[1];
   titre_musique= current_musique[2];
