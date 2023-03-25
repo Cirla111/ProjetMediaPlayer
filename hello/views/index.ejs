@@ -231,6 +231,7 @@
             while (folders_div.childNodes.length>1) {
                     folders_div.lastChild.remove();
             }
+
             let div_tot_song = document.createElement("div");
             div_tot_song.className = 'div_tot_songs';
             folders_div.appendChild(div_tot_song);
@@ -253,7 +254,7 @@
 
                     
                     div_tot_song.appendChild(div_song);
-            
+            }
             // div_album=document.getElementById(albumid);
             // booleen= div_album.getAttribute("alreadyclicked");
             // if (booleen=="false"){
@@ -318,4 +319,5 @@
         
 
     </script>
+
 </html>
