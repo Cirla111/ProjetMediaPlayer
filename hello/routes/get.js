@@ -40,9 +40,11 @@ router.get('/image/artist/:artistid', function(req, res, next) {
 });
 
 router.get('/current_song_set/:artist/:album/:song', function(req, res, next) {
+    console.log("oui");
     current_musique[0]=req.params.artist;
     current_musique[1]=req.params.album;
     current_musique[2]=req.params.song;
+    console.log("oui");
 });
 
 

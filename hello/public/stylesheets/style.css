@@ -225,6 +225,35 @@ header{
   font-family: 'Roboto', sans-serif;
 }
 
+.div_tot_songs{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 5%;
+  font-size: 0.5em;
+  
+}
+
+.div_song{
+  padding: 1.5%;
+  color: white;
+}
+
+.div_song:hover{
+  background-color: #373737;
+}
+
+.div_up{
+  
+  font-size: 0.8em;
+  margin: 1.5%;
+  margin-bottom: 2%;
+  color: lightgrey;
+  word-spacing: 0.9em;
+  border-bottom: solid 1px lightgrey;
+}
+
 .img_artiste {
   height: 100%;
 }

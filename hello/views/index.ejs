@@ -231,6 +231,15 @@
             while (folders_div.childNodes.length>1) {
                     folders_div.lastChild.remove();
             }
+            let div_tot_song = document.createElement("div");
+            div_tot_song.className = 'div_tot_songs';
+            folders_div.appendChild(div_tot_song);
+
+            let div_up = document.createElement("div");
+            div_up.className = 'div_up';
+            div_up.innerHTML="# Titre"
+            div_tot_song.appendChild(div_up);
+
             for (let i=0;i<n;i++){
                     let div_song = document.createElement("div"); 
                     div_song.innerHTML = liste_songs[i].substring(1,liste_songs[i].length-4);
@@ -240,8 +249,11 @@
                     div_song.setAttribute("album",album_name);
                     div_song.setAttribute("complete_name",liste_songs[i]);
                     cmdfunction="clickSong('" + div_song.id + "');"
-                    div_artiste.setAttribute("onclick",cmdfunction);
-                    folders_div.appendChild(div_song);
+                    div_song.setAttribute("onclick",cmdfunction);
+
+                    
+
+                    div_tot_song.appendChild(div_song);
                 }
             
             // div_album=document.getElementById(albumid);
@@ -292,6 +304,7 @@
         }
 
         function clickSong(song_id){
+            console.log("COUCOCUCUCUUC");
             div_song=document.getElementById(song_id);
             artiste_name=div_song.getAttribute("artist");
             album_name=div_song.getAttribute("album");
