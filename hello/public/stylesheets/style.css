@@ -76,15 +76,20 @@ header{
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 75vh;
+  height: 65vh;
   width:85vw;
+  transition: all 3s;
+}
+
+.smallerFront{
+  height: 50vh;
 }
 
 .canva{
   display: flex;
   flex-direction: row;
-  height: 70%;
-  width: 85%;
+  height: 75%;
+  width: 90%;
   background-color:#2e2e2e70;
   transition: all 3s;
 
@@ -135,9 +140,10 @@ header{
   width: 100%;
   display: flex;
   align-items: center;
+  margin: 3%;
 }
 
-.player span {
+.player .playPause {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -148,7 +154,54 @@ header{
   color:black;
   font-size: medium;
   cursor: pointer;
+  margin: 10px;
 }
+
+.player .prev{
+  cursor: pointer;
+  color: #575757;
+  transform: translate(0,5px);
+}
+
+.player .next{
+  cursor: pointer;
+  color: #575757;
+  transform: translate(0,5px);
+}
+
+.player .prev:hover{
+  color: #777777;
+}
+
+.player .next:hover{
+  color: #777777;
+}
+
+.navi{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 15%;
+}
+
+
+.progress-container{
+  background-color: #676767;
+  border-radius:5px;
+  cursor: pointer;
+  margin: 10px 0 ;
+  height: 4px;
+  width: 75%;
+}
+
+.progress{
+  background-color: #979797;
+  border-radius:5px;
+  height: 4px;
+  width: 50%;
+  transition: width 0.1s linear;
+}
+
 
 .folders {
   height: auto;
