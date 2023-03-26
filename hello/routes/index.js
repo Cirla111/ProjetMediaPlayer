@@ -45,7 +45,7 @@ router.get('/', function(req, res, next) {
   console.log(list_folder[nbr_art]);
   console.log(list_album[nbr_alb]);
   console.log(list_song[nbr_sg]);
-  current_musique=[list_folder[nbr_art],list_album[nbr_alb],list_song[nbr_sg]]
+  current_musique=[list_folder[nbr_art],list_album[nbr_alb],list_song[nbr_sg].substring(0,list_song[nbr_sg].length-4)]
   artiste_musique= current_musique[0];
   album_musique= current_musique[1];
   titre_musique= current_musique[2];

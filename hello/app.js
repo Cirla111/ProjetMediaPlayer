@@ -4,8 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-global.folder_musique="C:/Users/33645/Desktop/la fameuse/WEB/MusicMedia/Musique";
-global.folder_images="C:/Users/33645/Desktop/la fameuse/WEB/MusicMedia/images_app_web";
+/* global.folder_musique="C:/Users/33645/Desktop/la fameuse/WEB/MusicMedia/Musique";
+global.folder_images="C:/Users/33645/Desktop/la fameuse/WEB/MusicMedia/images_app_web"; */
+global.folder_musique="/home/damien/Musique";
+global.folder_images="/home/damien/Images/images_app_web";
 global.current_musique=["Lomepal","FLIP","01 - Palpal"];
 
 var indexRouter = require('./routes/index');
