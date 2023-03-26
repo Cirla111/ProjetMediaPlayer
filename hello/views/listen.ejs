@@ -93,6 +93,9 @@
         playPause.addEventListener("click", () => (songPlay ? Pause() : Play()));
         audio.addEventListener('timeupdate', updateBarre);
         progressCont.addEventListener('click', goToMusique);
+        next.addEventListener("click",clickNext);
+        prev.addEventListener("click",clickPrev);
+
 
         
 
@@ -111,6 +114,34 @@
             const time_tot=audio.duration;
 
             audio.currentTime=(xClick/tot_width)*time_tot;
+        }
+
+        function clickNext(id_button){
+            console.log("j'AI CLIQUE C'EST MAL");
+            album_name="<%= album%>";
+            artiste_name="<%= artiste%>";
+            liste_songs=JSON.parse(httpGet("http://localhost:3000/get/album/"+artiste_name+"/"+album_name)).liste_songs;
+            titre_complet="<%= titre%>"+".ogg";
+            index_current_song=liste_songs.indexOf(titre_complet);
+            console.log("BoutonNext");
+            indexfuture=(index_current_song+1)%liste_songs.length;
+            next_song=liste_songs[indexfuture].substring(0,liste_songs[indexfuture].length-4);
+            httpGet("http://localhost:3000/get/current_song_set/"+artiste_name+"/"+album_name+"/"+next_song);
+            location.href="/listen";
+        }
+
+        function clickPrev(id_button){
+            console.log("j'AI CLIQUE C'EST MAL");
+            album_name="<%= album%>";
+            artiste_name="<%= artiste%>";
+            liste_songs=JSON.parse(httpGet("http://localhost:3000/get/album/"+artiste_name+"/"+album_name)).liste_songs;
+            titre_complet="<%= titre%>"+".ogg";
+            index_current_song=liste_songs.indexOf(titre_complet);
+            console.log("BoutonNext");
+            indexfuture=(index_current_song-1)%liste_songs.length;
+            next_song=liste_songs[indexfuture].substring(0,liste_songs[indexfuture].length-4);
+            httpGet("http://localhost:3000/get/current_song_set/"+artiste_name+"/"+album_name+"/"+next_song);
+            location.href="/listen";
         }
 
 
@@ -137,6 +168,13 @@
         function demarrage(){
             changeSong();
             mod();
+        }
+
+        function httpGet(theUrl) {
+        let xmlHttpReq = new XMLHttpRequest();
+        xmlHttpReq.open("GET", theUrl, false);
+        xmlHttpReq.send(null);
+        return xmlHttpReq.responseText;
         }
 
 
