@@ -303,14 +303,13 @@
         }
 
         function clickSong(song_id){
-            console.log("COUCOCUCUCUUC");
             div_song=document.getElementById(song_id);
             artiste_name=div_song.getAttribute("artist");
             album_name=div_song.getAttribute("album");
             song_name=div_song.innerHTML;
-            location.href="/listen";
+            
             httpGet("http://localhost:3000/get/current_song_set/"+artiste_name+"/"+album_name+"/"+song_name);
-            console.log("COUCOCUCUCUUC");
+            location.href="/listen";
             
 
         }

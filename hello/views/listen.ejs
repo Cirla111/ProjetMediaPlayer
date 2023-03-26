@@ -92,7 +92,7 @@
 
         playPause.addEventListener("click", () => (songPlay ? Pause() : Play()));
         audio.addEventListener('timeupdate', updateBarre);
-        progressCont.addEventListener('clicl', goToMusique);
+        progressCont.addEventListener('click', goToMusique);
 
         
 
@@ -100,7 +100,8 @@
             time = ev.srcElement.currentTime;
             time_tot = ev.srcElement.duration;
             ratio=(time/time_tot)*100;
-            progress.style.width='${ratio}%';
+            progress.style.width=`${ratio}%`;
+            console.log("test");
 
         }
 
