@@ -114,7 +114,6 @@
             
             div_artiste=document.getElementById(artistid);
             artiste_name=div_artiste.innerHTML;
-            console.log(artiste_name);
             liste_albums=JSON.parse(httpGet("http://localhost:3000/get/artist/"+artiste_name)).liste_albums;
             // console.log(JSON.parse(httpGet("http://localhost:3000/get/image/album/"+"<%= liste %>")));
             const n=liste_albums.length;
