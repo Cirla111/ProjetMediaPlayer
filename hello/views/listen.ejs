@@ -120,6 +120,7 @@
             document.getElementById("infos_album").innerHTML="<%= album %>";
             document.getElementById("infos").innerHTML= "<%= artiste %>";
             document.getElementById("balise_audio").src="<%= path_musique %>";
+            document.getElementById("albumCover").src="http://localhost:3000/get/image/album/"+"<%= album %>";
             
         }
     
@@ -135,6 +136,7 @@
             changeSong();
             mod();
         }
+
 
         
         
