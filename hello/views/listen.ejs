@@ -124,7 +124,12 @@
             titre_complet="<%= titre%>"+".ogg";
             index_current_song=liste_songs.indexOf(titre_complet);
             console.log("BoutonNext");
-            indexfuture=(index_current_song+1)%liste_songs.length;
+            if (index_current_song==liste_songs.length-1){
+                indexfuture=0
+            }
+            else{
+                indexfuture=index_current_song+1;
+            }
             next_song=liste_songs[indexfuture].substring(0,liste_songs[indexfuture].length-4);
             httpGet("http://localhost:3000/get/current_song_set/"+artiste_name+"/"+album_name+"/"+next_song);
             location.href="/listen";
@@ -137,8 +142,13 @@
             liste_songs=JSON.parse(httpGet("http://localhost:3000/get/album/"+artiste_name+"/"+album_name)).liste_songs;
             titre_complet="<%= titre%>"+".ogg";
             index_current_song=liste_songs.indexOf(titre_complet);
-            console.log("BoutonNext");
-            indexfuture=(index_current_song-1)%liste_songs.length;
+            console.log("BoutonPrev");
+            if (index_current_song==0){
+                indexfuture=liste_songs.length-1;
+            }
+            else{
+                indexfuture=index_current_song-1;
+            }
             next_song=liste_songs[indexfuture].substring(0,liste_songs[indexfuture].length-4);
             httpGet("http://localhost:3000/get/current_song_set/"+artiste_name+"/"+album_name+"/"+next_song);
             location.href="/listen";
