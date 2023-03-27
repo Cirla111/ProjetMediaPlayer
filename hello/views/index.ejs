@@ -231,6 +231,8 @@
                     folders_div.lastChild.remove();
             }
 
+            console.log(folders_div);
+            
             let div_tot_song = document.createElement("div");
             div_tot_song.className = 'div_tot_songs';
             folders_div.appendChild(div_tot_song);
@@ -308,8 +310,6 @@
             
             httpGet("http://localhost:3000/get/current_song_set/"+artiste_name+"/"+album_name+"/"+song_name);
             location.href="/listen";
-            
-
         }
       
 

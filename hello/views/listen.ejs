@@ -27,13 +27,15 @@
                         <div class="texteFront">
                             <h3>Titre</h3>
                             <h1 id="h1_Titre">Remember</h1>
-                            <h3 id="infos">Sawano Hiroyuki, 2012</h3>
-                            <h3 id="infos_album">Sawano Hiroyuki, 2012</h3>
+                            <div class="infosall">
+                                <h3 id="infos">Sawano Hiroyuki, 2012, </h3>
+                                <h3 id="infos_album">Sawano Hiroyuki, 2012</h3>
+                            </div>
                             
                         </div>
                     </div>
                 </div>
-                <div class="folders">
+                <div class="folders" id="folders">
                     <div class="player">
                         <audio id="balise_audio" src="/music/pkmn.mp3"></audio>
                         <div class="navi">
@@ -94,7 +96,7 @@
         progressCont.addEventListener('click', goToMusique);
         next.addEventListener("click",clickNext);
         prev.addEventListener("click",clickPrev);
-
+        audio.addEventListener('ended', clickNext);
 
         
 
@@ -158,11 +160,61 @@
             //changer le src de audio
             document.getElementById("h1_Titre").innerHTML="<%= titre %>";
             document.getElementById("infos_album").innerHTML="<%= album %>";
-            document.getElementById("infos").innerHTML= "<%= artiste %>";
+            document.getElementById("infos").innerHTML= "<%= artiste %>" +', ';
             document.getElementById("balise_audio").src="<%= path_musique %>";
             console.log("<%= path_musique %>");
             document.getElementById("albumCover").src="http://localhost:3000/get/image/album/"+"<%= album %>";
             
+        }
+
+        function display_load(){
+
+            const folders_div = document.getElementById("folders");
+
+            
+            
+            album_name="<%= album %>";
+            artiste_name="<%= artiste %>";
+            liste_songs=JSON.parse(httpGet("http://localhost:3000/get/album/"+artiste_name+"/"+album_name)).liste_songs;
+            const n=liste_songs.length;
+
+            console.log(folders_div);
+
+            let div_tot_song = document.createElement("div");
+            div_tot_song.className = 'div_tot_songs';
+            folders_div.appendChild(div_tot_song);
+
+            let div_up = document.createElement("div");
+            div_up.className = 'div_up';
+            div_up.innerHTML="# Titre"
+            div_tot_song.appendChild(div_up);
+
+            for (let i=0;i<n;i++){
+                    let div_song = document.createElement("div"); 
+                    div_song.innerHTML = liste_songs[i].substring(0,liste_songs[i].length-4);
+                    div_song.id = "div_song_"+i+"_"+album_name;
+                    div_song.className = "div_song";
+                    div_song.setAttribute("artist",artiste_name);
+                    div_song.setAttribute("album",album_name);
+                    div_song.setAttribute("complete_name",liste_songs[i]);
+                    cmdfunction="clickSong('" + div_song.id + "');"
+                    div_song.setAttribute("onclick",cmdfunction);
+
+                    
+                    div_tot_song.appendChild(div_song);
+            }
+            
+            
+        }
+
+        function clickSong(song_id){
+            div_song=document.getElementById(song_id);
+            artiste_name=div_song.getAttribute("artist");
+            album_name=div_song.getAttribute("album");
+            song_name=div_song.innerHTML;
+            
+            httpGet("http://localhost:3000/get/current_song_set/"+artiste_name+"/"+album_name+"/"+song_name);
+            location.href="/listen";
         }
     
         function mod(){
@@ -174,7 +226,9 @@
 
         function demarrage(){
             changeSong();
+            display_load();
             mod();
+
         }
 
         function httpGet(theUrl) {
