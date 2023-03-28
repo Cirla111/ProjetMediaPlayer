@@ -16,7 +16,7 @@
 
         
         <div id="allPage"> 
-            <div class = "bandeau">
+            <div class = "bandeau" id="leCote">
             </div>
             <div class = "mainPage">
                 <div class="frontMusic">
@@ -34,6 +34,11 @@
                             
                         </div>
                     </div>
+                </div>
+                <div class="top_folder">
+                    <button class="home" onclick="reset_menu()">
+                        <ion-icon name="home"></ion-icon>
+                    </button>
                 </div>
                 <div class="folders" id="folders">
                     <div class="player">
@@ -154,6 +159,15 @@
             location.href="/listen";
         }
 
+        function reset_menu(){
+            const folders_div = document.getElementById("folders");
+
+            while (folders_div.childNodes.length>2) {
+                folders_div.lastChild.remove();
+            }
+            display_artist();
+        }
+
 
         function changeSong(){
             //changer le titre et tout
@@ -165,6 +179,131 @@
             console.log("<%= path_musique %>");
             document.getElementById("albumCover").src="http://localhost:3000/get/image/album/"+"<%= album %>";
             
+        }
+
+
+
+        function display_artist(){
+            const liste_artiste="<%= liste %>".split(",");
+            const folders_div = document.getElementById("folders");
+            const side_div = document.getElementById("leCote");
+            const n=liste_artiste.length;
+            for (let i=0;i<n;i++){
+                
+
+
+                let div_artiste = document.createElement("div");
+                document.createAttribute("class");
+                div_artiste.innerHTML = liste_artiste[i];
+                div_artiste.id = "div_artiste_"+i ;
+                div_artiste.className = "div_artiste";
+                div_artiste.setAttribute("alreadyclicked","false");
+
+                a='<img id="img_artiste_0" class="img_artiste" src="http://localhost:3000/get/image/artist/' + liste_artiste[i] + '"/>'
+
+                let div_tot = document.createElement("div");
+                div_tot.className = 'container_img_txt'
+                cmdfunction="display_album('" + div_artiste.id + "');"
+                div_tot.setAttribute("onclick",cmdfunction);
+
+                let div_img = document.createElement("div");
+                div_img.className = 'div_img'
+                div_img.innerHTML+=a;
+
+                let div_categ = document.createElement("div");
+                div_categ.className = 'div_categ';
+                div_categ.innerHTML = "Artiste";
+                
+                div_tot.appendChild(div_img);
+                div_tot.appendChild(div_artiste);
+                div_tot.appendChild(div_categ);
+                folders_div.appendChild(div_tot);
+            }
+        }
+
+        function display_album(artistid){
+
+            const folders_div = document.getElementById("folders");
+            
+            div_artiste=document.getElementById(artistid);
+            artiste_name=div_artiste.innerHTML;
+            liste_albums=JSON.parse(httpGet("http://localhost:3000/get/artist/"+artiste_name)).liste_albums;
+            // console.log(JSON.parse(httpGet("http://localhost:3000/get/image/album/"+"<%= liste %>")));
+            const n=liste_albums.length;
+            while (folders_div.childNodes.length>2) {
+                    folders_div.lastChild.remove();
+                }
+            for (let i=0;i<n;i++){
+                let div_album = document.createElement("div");
+                div_album.innerHTML = liste_albums[i];
+                div_album.id = "div_album_"+i+"_"+artistid;
+                div_album.className = "div_album";
+                div_album.setAttribute("artist",artiste_name);
+
+                a='<img class="img_album" src="http://localhost:3000/get/image/album/' +liste_albums[i] + '"/>'
+
+                let div_tot = document.createElement("div");
+                div_tot.className = 'container_img_txt'
+                cmdfunction="display_songs('" + div_album.id + "');"
+                div_tot.setAttribute("onclick",cmdfunction);
+
+                let div_img = document.createElement("div");
+                div_img.className = 'div_img'
+                div_img.innerHTML+=a;
+
+                let div_categ = document.createElement("div");
+                div_categ.className = 'div_categ';
+                div_categ.innerHTML = "Album";
+                
+                div_tot.appendChild(div_img);
+                div_tot.appendChild(div_album);
+                div_tot.appendChild(div_categ);
+                folders_div.appendChild(div_tot);
+
+
+            }
+
+        }
+
+        function display_songs(albumid){
+
+            const folders_div = document.getElementById("folders");
+            
+            div_album=document.getElementById(albumid);
+            album_name=div_album.innerHTML;
+            artiste_name=div_album.getAttribute("artist");
+            liste_songs=JSON.parse(httpGet("http://localhost:3000/get/album/"+artiste_name+"/"+album_name)).liste_songs;
+            const n=liste_songs.length;
+            while (folders_div.childNodes.length>2) {
+                    folders_div.lastChild.remove();
+            }
+
+            console.log(folders_div);
+
+            let div_tot_song = document.createElement("div");
+            div_tot_song.className = 'div_tot_songs';
+            folders_div.appendChild(div_tot_song);
+
+            let div_up = document.createElement("div");
+            div_up.className = 'div_up';
+            div_up.innerHTML="# Titre"
+            div_tot_song.appendChild(div_up);
+
+            for (let i=0;i<n;i++){
+                    let div_song = document.createElement("div"); 
+                    div_song.innerHTML = liste_songs[i].substring(0,liste_songs[i].length-4);
+                    div_song.id = "div_song_"+i+"_"+albumid;
+                    div_song.className = "div_song";
+                    div_song.setAttribute("artist",artiste_name);
+                    div_song.setAttribute("album",album_name);
+                    div_song.setAttribute("complete_name",liste_songs[i]);
+                    cmdfunction="clickSong('" + div_song.id + "');"
+                    div_song.setAttribute("onclick",cmdfunction);
+
+                    
+                    div_tot_song.appendChild(div_song);
+            }
+
         }
 
         function display_load(){

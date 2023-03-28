@@ -8,7 +8,7 @@ const { stringify } = require("csv-stringify");
 
 router.get('/', function(req, res, next) {
     var list_folder= fs.readdirSync(folder_playlist);
-    res.send({liste_albums: list_folder});
+    res.render({liste_albums: list_folder});
   });
 
 

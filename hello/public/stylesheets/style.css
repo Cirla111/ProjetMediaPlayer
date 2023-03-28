@@ -203,6 +203,29 @@ header{
   transition: width 0.1s linear;
 }
 
+.top_folder{
+  height: 5vh;
+  width:97%;
+  max-width: 97%;
+  background: #2e2e2e;
+  display: flex;
+  align-items: center;
+}
+
+.home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: #2e2e2e;
+  color:black;
+  font-size: medium;
+  cursor: pointer;
+  margin: 10px;
+}
+
 
 .folders {
   height: auto;

@@ -37,7 +37,13 @@
                         </div>
                     </div>
                 </div>
+                <div class="top_folder">
+                    <button class="home" onclick="reset_menu()">
+                        <ion-icon name="home"></ion-icon>
+                    </button>
+                </div>
                 <div class="folders" id="folders">
+                    
                 </div>
 
             </div>
@@ -46,6 +52,9 @@
 
         
     </body>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 
     <script>
@@ -232,7 +241,7 @@
             }
 
             console.log(folders_div);
-            
+
             let div_tot_song = document.createElement("div");
             div_tot_song.className = 'div_tot_songs';
             folders_div.appendChild(div_tot_song);
@@ -283,6 +292,16 @@
 
             // }
             
+        }
+
+
+        function reset_menu(){
+            const folders_div = document.getElementById("folders");
+
+            while (folders_div.childNodes.length>1) {
+                folders_div.lastChild.remove();
+            }
+            display_artist();
         }
 
         function httpGet(theUrl) {
