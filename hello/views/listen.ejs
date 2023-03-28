@@ -3,7 +3,7 @@
 <html lang="fr">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>example1</title>
+    <title>Media Player</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
 </head>
 
@@ -22,14 +22,14 @@
                 <div class="frontMusic">
                     <div class="canva">
                         <div class="imageFront">
-                            <img src="images/SawanoCover.jpg" id="albumCover"/>
+                            <img id="albumCover"/>
                         </div>
                         <div class="texteFront">
-                            <h3>Titre</h3>
-                            <h1 id="h1_Titre">Remember</h1>
+                            <h3 id="h3_titre"></h3>
+                            <h1 id="h1_Titre"></h1>
                             <div class="infosall">
-                                <h3 id="infos">Sawano Hiroyuki, 2012, </h3>
-                                <h3 id="infos_album">Sawano Hiroyuki, 2012</h3>
+                                <h3 id="infos"></h3>
+                                <h3 id="infos_album"></h3>
                             </div>
                             
                         </div>
@@ -176,6 +176,7 @@
             document.getElementById("infos_album").innerHTML="<%= album %>";
             document.getElementById("infos").innerHTML= "<%= artiste %>" +', ';
             document.getElementById("balise_audio").src="<%= path_musique %>";
+            document.getElementById("h3_titre").innerHTML="Titre";
             console.log("<%= path_musique %>");
             document.getElementById("albumCover").src="http://localhost:3000/get/image/album/"+"<%= album %>";
             
