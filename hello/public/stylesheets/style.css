@@ -199,7 +199,7 @@ header{
   background-color: #979797;
   border-radius:5px;
   height: 4px;
-  width: 50%;
+  width: 0%;
   transition: width 0.1s linear;
 }
 
